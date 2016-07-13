@@ -1,0 +1,33 @@
+---
+title: "K-Means"
+author: "Bhargavi Madakasira"
+date: "March 20, 2016"
+output: word_document
+---
+
+
+# K-Means using BuyerData.csv
+```{r}
+buyer <- read.csv("C:/SPJain/Term-3/MachineLearning-102_Unsupervised/ML-102_Day2/BuyerData.csv")
+#View(buyer)
+
+```
+
+# Using kmeans() in R
+```{r}
+set.seed(1)
+grpID <- kmeans(buyer[,-1],centers=3,nstart=6)
+data.frame(buyer$id,grpID$cluster)
+
+plot(x=buyer$Budget,y=buyer$Bhk,xlab = "Budget",ylab = "No.of bedrooms",ylim = c(0,10),type = "n")
+text(x=buyer$Budget,y=buyer$Bhk,labels = buyer$Budget,col=rainbow(7)[grpID$cluster])
+```
+
+
+```{r}
+
+
+```
+
+
+

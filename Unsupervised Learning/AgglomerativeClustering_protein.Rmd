@@ -1,0 +1,35 @@
+---
+title: 'Agglomerative Clustering : protein.csv'
+author: "Bhargavi Madakasira"
+date: "March 22, 2016"
+output: word_document
+---
+```{r}
+
+#Load the cluster library needed to run agnes() and other clustering functions
+library(cluster)
+food <- read.csv("C:/SPJain/Term-3/MachineLearning-102_Unsupervised/ML-102_Day3/protein.csv")
+
+# Customize the cluster analysis by changing the distance measure (metric), the linkage method (method)
+#Distance metrics are limited in agnes() to euclidean and manhattan.
+##Euclidean distance and average linkage
+
+food_Agg <- agnes(food,diss=FALSE,metric = "euclidean")
+# Plot the dendrogram.
+plot(food_Agg)
+
+
+##Euclidean distance and single linkage
+
+food_Agg_Single <- agnes(food,diss=FALSE,metric = "euclidean", method = "single")
+plot(food_Agg_Single)
+
+##Euclidean distance and complete linkage
+
+food_Agg_Single <- agnes(food,diss=FALSE,metric = "euclidean", method = "complete")
+plot(food_Agg_Single)
+
+
+
+```
+

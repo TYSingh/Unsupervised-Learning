@@ -1,0 +1,21 @@
+---
+title: "K-Means_protein.csv"
+author: "Bhargavi Madakasira"
+date: "March 20, 2016"
+output: word_document
+---
+
+```{r}
+#Load Datafromprotein.csv
+food <- read.csv("C:/SPJain/Term-3/MachineLearning-102_Unsupervised/ML-102_Day2/protein.csv", header = TRUE)
+View(food)
+set.seed(1)
+grpProtein <- kmeans(food[,-1],centers=7,nstart=10)
+#o=order(grpProtein$cluster)
+data.frame(food$Country,grpProtein$cluster)
+plot(food$RedMeat,food$WhiteMeat,type="n",xlim=c(3,19),xlab = "Red Meat",ylab="White Meat")
+text(x=food$RedMeat,y=food$WhiteMeat,labels = food$Country,col=rainbow(7)[grpProtein$cluster])
+
+
+```
+

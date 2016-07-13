@@ -1,0 +1,31 @@
+---
+title: 'Agglomerative Clustering : BuyerData.csv'
+author: "Bhargavi Madakasira"
+date: "March 22, 2016"
+output: word_document
+---
+
+```{r}
+#install.packages("cluster")
+library(cluster)
+buyers <- read.csv("C:/SPJain/Term-3/MachineLearning-102_Unsupervised/ML-102_Day3/BuyerData.csv")
+
+#Euclidean distance and average linkage
+# agnes() : method for AGglomerative NESting
+buyer_Agg <- agnes(buyers,diss=FALSE,metric = "euclidean")
+plot(buyer_Agg)
+
+
+##Euclidean distance and single linkage
+
+buyer_Agg_single <- agnes(buyers,diss=FALSE,metric = "euclidean", method = "single")
+plot(buyer_Agg_single)
+
+##Euclidean distance and complete linkage
+
+buyer_Agg_complete <- agnes(buyers,diss=FALSE,metric = "euclidean", method = "complete")
+plot(buyer_Agg_complete)
+
+
+```
+

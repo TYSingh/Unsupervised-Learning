@@ -1,0 +1,61 @@
+---
+title: "Multiple Linear Regression with Categorical data"
+author: "Bhargavi Madakasira"
+date: "March 20, 2016"
+output: word_document
+---
+
+```{r}
+
+#Always convert the given excel file into csv file by saving it as CSV(comma delimited) format before
+#importing it to R
+
+salary_data <- read.csv("C:/SPJain/Term-3/MachineLearning-102_Unsupervised/ML-102_Day2/RegressionData.csv", stringsAsFactors=F)
+# Give "stringsAsFactors=F" so that the dummy variable will be in numeric form when categorical variable
+# Gender(data type : char) is converted to dummy variable.
+#View(salary_data)
+# attach(salary_data)
+
+plot(salary_data$Age,salary_data$Salary,xlab="Age",ylab="Salary")
+plot(factor(salary_data$Genger),salary_data$Salary,xlab="Gender",ylab="Salary") #boxplot
+# above command : converting factors(i.e..gender) to numeric
+#other way to plot boxplot
+boxplot(salary_data$Salary ~ salary_data$Genger)
+
+#converting categorical variable(Gender) to Dummy variable(numeric) and adding this column to salary_data
+#This is done to see scatter plot instead of boxplot for the II plot above
+salary_data$Dummy[salary_data$Genger=="M"] <- 1
+salary_data$Dummy[salary_data$Genger=="F"] <- 0
+View(salary_data)
+plot(salary_data$Dummy,salary_data$Salary,xlab="Gender",ylab="Salary")
+
+model <- lm(salary_data$Salary ~ salary_data$Age+salary_data$Dummy)
+summary(model)
+model
+
+
+#Refer http://ww2.coastal.edu/kingw/statistics/R-tutorials/multregr.html for plots
+data_frame <- as.data.frame(salary_data)
+Scatter_matrix <- data_frame[-3]
+str(Scatter_matrix)
+pairs(Scatter_matrix) #arguments of pairs() must consist of numberic attributes.Generates scatter_plot
+#matrix
+#the middle square in the first column of the scatter plot matrix generated is an individual scatterplot
+#of Salary and Age, with Age as the X-axis and Salary as the Y-axis.
+##### The diagonal attribute of a row is y-axis
+#the first square in the second column of the scatter plot matrix generated is an individual scatterplot
+#of Salary and Age, with salary as the X-axis and age as the Y-axis.
+#In essence, the boxes on the upper right hand side of the whole scatterplot are mirror images of the 
+#plots on the lower left hand.
+
+#Regression Diagnostics
+#The usual diagnostic plots are available... 
+par(mfrow=c(2,2))                    # visualize four graphs at once
+plot(model)                          # Displays 4 graphs of Multiple Linear Regression(MLR)
+par(mfrow=c(1,1))                    # reset the graphics defaults
+
+
+
+
+```
+
